@@ -1,19 +1,17 @@
 #pragma once 
 #include <vector>
+#include "StrategyVariant.h"
 
 class HappyTicket
 {
 private:
-    int _countOfDigits_N;
-    int _base_D;
+    StrategyVariant* strategy_;
 public:
+    HappyTicket(StrategyVariant* strategy = nullptr);
+    ~HappyTicket();
+
+    std::vector<int> DoAlgorithm();
     int getCountOfDigits_N();
-    void setCountOfDigits_N(int);
-
     int getBase_D();
-    void setBase_D(int);
-
-    virtual ~HappyTicket() = default;
-    virtual std::vector<int> solve() = 0;
 };
 

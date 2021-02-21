@@ -1,9 +1,9 @@
 #include "SolveVersionOne.h"
 
-SolveVersionOne::SolveVersionOne(GeneratorTasks test)
+SolveVersionOne::SolveVersionOne(GeneratorTasks* test)
 {
-    setCountOfDigits_N(test.getDigits_N());
-    setBase_D(test.getBase_D());
+    setCountOfDigits_N(test->getDigits_N());
+    setBase_D(test->getBase_D());
     dpResize();
 }
 

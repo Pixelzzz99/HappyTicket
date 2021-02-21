@@ -1,8 +1,10 @@
 #pragma once
-#include "HappyTicket.h"
+#include "StrategyVariant.h"
 #include "GeneratorTasks.h"
 #include <algorithm>
-class SolveVersionOne : public HappyTicket
+
+
+class SolveVersionOne : public StrategyVariant
 {
 private:
     std::vector<std::vector<std::vector<int>>> dp;
@@ -12,7 +14,7 @@ private:
     void dpResize();
 public:
 
-    SolveVersionOne(GeneratorTasks);
+    SolveVersionOne(GeneratorTasks *);
     SolveVersionOne(int N, int D);
     ~SolveVersionOne() = default;
     

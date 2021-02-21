@@ -1,21 +1,28 @@
 #include "HappyTicket.h"
 
-int HappyTicket::getCountOfDigits_N()
+HappyTicket::HappyTicket(StrategyVariant* strategy) 
 {
-    return _countOfDigits_N;
+    this->strategy_ = strategy;
 }
 
-void HappyTicket::setCountOfDigits_N(int new_n)
+HappyTicket::~HappyTicket()
 {
-    this->_countOfDigits_N = new_n;
+    delete strategy_;
+}
+
+std::vector<int> HappyTicket::DoAlgorithm()
+{
+    return strategy_->solve();
+}
+
+int HappyTicket::getCountOfDigits_N()
+{
+    return strategy_->getCountOfDigits_N();
 }
 
 int HappyTicket::getBase_D()
 {
-    return _base_D;
+    return strategy_->getBase_D();
 }
 
-void HappyTicket::setBase_D(int new_d)
-{
-    this->_base_D = new_d;
-}
+
