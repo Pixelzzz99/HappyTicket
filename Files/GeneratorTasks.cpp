@@ -7,6 +7,12 @@ GeneratorTasks::GeneratorTasks()
     random_D = Randomizator(MIN_COUNT, MAX_COUNT);
 }
 
+GeneratorTasks::GeneratorTasks(int n, int d)
+{
+    random_N = n;
+    random_D = d;
+}
+
 int GeneratorTasks::Randomizator(int min, int max)
 {
     static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0); 

@@ -16,7 +16,7 @@ public:
 
     int getDigits_N();
     int getBase_D();
-
+    GeneratorTasks(int n, int d);
     GeneratorTasks();
     ~GeneratorTasks() = default;
 };
