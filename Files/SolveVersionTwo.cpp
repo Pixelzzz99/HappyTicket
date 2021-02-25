@@ -1,5 +1,8 @@
 #include "SolveVersionTwo.h"
 #include <string>
+#include <utility>
+#include <algorithm>
+
 SolveVersionTwo::SolveVersionTwo(GeneratorTasks *test)
 {
     setCountOfDigits_N(test->getDigits_N());
@@ -16,18 +19,18 @@ std::vector<int> SolveVersionTwo::solve()
     for (long long i = 0; i < maxNumber; i++)
     {
         if (good(i, d, 2 * n))
-        {  
+        {
             answer++;
         }
     }
-    return getLength(answer);
+    return trans(answer, d);
 }
 
 long long SolveVersionTwo::getMax(int length, int d)
 {
-    length *=  2;
+    length *= 2;
     long long result = 1;
-    while(length--)
+    while (length--)
     {
         result = result * (long long)1 * d;
     }
@@ -41,25 +44,30 @@ bool SolveVersionTwo::good(long long index, long long d, int length)
     {
         result.push_back(char('0' + index % d));
         index /= d;
-    }    
+    }
     int left = 0;
     int right = length - 1;
-    while(left <= right)
+
+    int sumLeft = 0;
+    int sumRight = 0;
+
+    while (left <= right)
     {
-        if(result[left] !=  result[right]) return false;
+        sumLeft += result[left] - '0';
+        sumRight += result[right] - '0';
         left++;
         right--;
     }
-    return true;
+    return sumLeft == sumRight;
 }
 
-std::vector<int> getLength(int x)
+std::vector<int> SolveVersionTwo::trans(long long x, long long d)
 {
     std::vector<int> result;
-    while(x>0)
+    while (x > 0)
     {
-        result.push_back(x%10);
-        x /= 10;
+        result.push_back(x % d);
+        x /= d;
     }
     std::reverse(result.begin(), result.end());
     return result;

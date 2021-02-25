@@ -1,6 +1,6 @@
 #include "SolveVersionOne.h"
 
-SolveVersionOne::SolveVersionOne(GeneratorTasks* test)
+SolveVersionOne::SolveVersionOne(GeneratorTasks *test)
 {
     setCountOfDigits_N(test->getDigits_N());
     setBase_D(test->getBase_D());
@@ -21,7 +21,7 @@ void SolveVersionOne::dpResize()
     dp.resize(n + 2);
     for (int i = 0; i < n + 2; i++)
     {
-        dp[i].resize(n * (d + 1));
+        dp[i].resize((n + 1) * (d + 1));
     }
 }
 
@@ -52,7 +52,7 @@ std::vector<int> SolveVersionOne::solve()
     }
 
     std::vector<int> answer = {0};
-    for (int i = 0; i <= (getCountOfDigits_N() * (getBase_D()-1)); i++)
+    for (int i = 0; i <= (getCountOfDigits_N() * (getBase_D() - 1)); i++)
     {
         answer = add(answer, multiplication(dp[getCountOfDigits_N()][i], dp[getCountOfDigits_N()][i], getBase_D()), getBase_D());
     }
@@ -76,7 +76,7 @@ std::vector<int> SolveVersionOne::add(std::vector<int> a, std::vector<int> b, in
         del = (b[i] + a[i] + del) / base;
         c.push_back(x);
     }
-    
+
     for (int i = b.size(); i < a.size(); i++)
     {
         int x = (a[i] + del) % base;
@@ -114,26 +114,26 @@ std::vector<int> SolveVersionOne::multiplication(std::vector<int> a, std::vector
         result.push_back(now_summer % base);
         now_summer /= base;
     }
-    
+
     for (int i = 1; i < b.size(); i++)
     {
-        int ind = i; 
+        int ind = i;
         int ind1 = a.size() - 1;
         while (ind < b.size() && ind1 >= 0)
         {
             now_summer += b[ind] * a[ind1];
             ind++;
-            ind1++;
+            ind1--;
         }
         result.push_back(now_summer % base);
         now_summer /= base;
     }
 
-    if (now_summer > 0) 
+    if (now_summer > 0)
     {
         result.push_back(now_summer);
     }
-    while (result.size() > 0 && result.back() == 0) 
+    while (result.size() > 0 && result.back() == 0)
     {
         result.pop_back();
     }
@@ -143,5 +143,5 @@ std::vector<int> SolveVersionOne::multiplication(std::vector<int> a, std::vector
     }
     std::reverse(result.begin(), result.end());
 
-    return result;    
+    return result;
 }
